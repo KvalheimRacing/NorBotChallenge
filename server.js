@@ -2,6 +2,7 @@
 var config = require('./config.json');
 var assert = require('assert');
 var path = require('path');
+
 //Webserver
 var express = require('express');
 var app = express();
@@ -28,6 +29,8 @@ app.set('view engine', 'pug');
 //Configure Express to use the body-parser
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+app.use(express.static('app/public'));
 
 app.use(require('./app/routes/robots'));
 app.use(require('./app/controllers'));
