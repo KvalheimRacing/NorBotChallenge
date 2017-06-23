@@ -26,3 +26,5 @@ See https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 -----
 
 See https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
+and
+https://www.terlici.com/2014/08/25/best-practices-express-structure.html
