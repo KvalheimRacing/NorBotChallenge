@@ -4,9 +4,13 @@ var assert = require('assert');
 var path = require('path');
 
 //Webserver
+//var express = require('express');
+//var http = require('http').Server(express);
+//var app = express();
 var express = require('express');
-var app = express();
-var io = require('socket.io')();
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 var bodyParser = require('body-parser');
 
 //Database
@@ -17,6 +21,10 @@ mongoose.connect(mongoDbUrl, function(err, db) {
    assert.equal(null, err);
    console.log("Connected to MongoDB server...");
  });
+
+io.on('connection', function(socket){
+  console.log("A Socket.IO client just connected!");
+});
 
 var Robot = require('./app/models/robot');
 
@@ -120,6 +128,6 @@ app.use("/api", router);
 */
 
 var port = config.port || 8080;
-var server = app.listen(port, function() {
+server.listen(port, function() {
   console.log("Webserver listening on port " + config.port);
 });
