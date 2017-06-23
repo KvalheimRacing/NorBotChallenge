@@ -9,6 +9,7 @@
     "express": "^4.15.3",
     "mongodb": "^2.2.29",
     "mongoose": "^4.10.8",
+    "pug": "^2.0.0-rc.2",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {

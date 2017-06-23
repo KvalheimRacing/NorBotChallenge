@@ -1,7 +1,7 @@
 //Generic
 var config = require('./config.json');
 var assert = require('assert');
-
+var path = require('path');
 //Webserver
 var express = require('express');
 var app = express();
@@ -22,12 +22,19 @@ var Robot = require('./app/models/robot');
 mongoose.Promise = global.Promise;
 //mongoose.Promise = require('bluebird');
 
+app.set('views', path.join(__dirname, 'app/views'));
+app.set('view engine', 'pug');
+
 //Configure Express to use the body-parser
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use(require('./app/routes/robots'));
 app.use(require('./app/controllers'));
+
+app.get("/admin", function(req, res) {
+  res.render('admin', {title: "Hello Admin", message: "something"});
+})
 
 // app.get('/test', function(req, res) {
 //   Robot.find({}, function(err, robots){
