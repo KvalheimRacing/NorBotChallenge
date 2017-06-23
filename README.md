@@ -15,10 +15,14 @@ See https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
 * Get all the required NPM modules
 
-      npm update
+      npm install
 
 * Start the backend server
 
       node server.js
 
 * Browse to http://localhost:3000
+
+-----
+
+See https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
