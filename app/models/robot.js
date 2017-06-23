@@ -5,10 +5,11 @@ var RobotSchema = new Schema({
     type: String,
     Required: 'A robot must have a name'
   },
-  CreatedDate: {
+  createddate: {
     type: Date,
     default: Date.now
-  }
+  },
+  country: String
 });
 
 module.exports = mongoose.model('Robot', RobotSchema);
