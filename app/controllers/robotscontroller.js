@@ -1,8 +1,24 @@
-var express = require('express');
-var router = express.Router();
+var mongoose = require('mongoose');
+var Robot = mongoose.model('Robot');
 
-router.post('/', function(req, res) {
-  res.json({message: "from robotcontroller"});
-})
+exports.list_all_robots = function(req, res) {
+  Robot.find({}, function(err, robots) {
+    if (err) {
+      res.send(err);
+    }
 
-module.exports = router
+    res.send(robots);
+  });
+};
+
+exports.create_robot = function(req, res) {
+  var robot = new Robot();
+  robot.name = req.body.name;;
+
+  robot.save(function(err) {
+      if (err)
+        res.send(err);
+  });
+
+  res.sendStatus(200);
+}

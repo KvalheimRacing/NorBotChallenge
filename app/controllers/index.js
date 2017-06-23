@@ -2,6 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Robot = require('../models/robot');
 
-router.use('/robots2', require('./robotscontroller'))
+// router.use('/api/robots', require('./robotscontroller'))
 
 module.exports = router
