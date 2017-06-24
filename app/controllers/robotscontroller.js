@@ -17,11 +17,25 @@ exports.create_robot = function(req, res) {
   robot.country = req.body.country;
 
   robot.save(function(err) {
-      if (err)
-        res.send(err);
+    if (err) {
+      //console.log("error while saving:");
+      //console.log(err);
+      res.send(err);
+    } else {
+      res.sendStatus(201);
+    }
   });
 
-  res.sendStatus(200);
+}
+
+exports.delete_robot_by_name = function(req, res) {
+  console.log("delete_robot_by_name called");
+  Robot.remove({
+    name: req.params.name
+  }, function(err) {
+    if (err) res.send(err);
+    else res.sendStatus(204);
+  });
 }
 
 exports.delete_all_robots = function(req, res) {
@@ -30,5 +44,5 @@ exports.delete_all_robots = function(req, res) {
       res.send(err);
   });
 
-  res.sendStatus(200);
+  res.sendStatus(204);
 }

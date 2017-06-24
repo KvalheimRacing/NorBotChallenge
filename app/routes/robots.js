@@ -24,4 +24,9 @@ router.delete('/api/robots', function(req, res) {
   robotscontroller.delete_all_robots(req, res);
 });
 
+router.delete('/api/robots/:name', function(req,res) {
+  console.log("DELETE called for a single robot by name");
+  robotscontroller.delete_robot_by_name(req, res);
+});
+
 module.exports = router

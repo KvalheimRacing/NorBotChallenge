@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 var RobotSchema = new Schema({
   name: {
     type: String,
-    Required: 'A robot must have a name'
+    Required: 'A robot must have a name',
+    unique: true
   },
   owner: String,
   team: String,

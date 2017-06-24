@@ -39,7 +39,7 @@ io.on('connection', function(socket){
     r.country = robot.country;
     r.save(function(err) {
       if (err)
-        throw err;
+        res.send(err);
     });
 
     //Inform any listening clients
