@@ -24,6 +24,17 @@ mongoose.connect(mongoDbUrl, function(err, db) {
 
 io.on('connection', function(socket){
   console.log("A Socket.IO client just connected!");
+
+  socket.on('register-robot', function(robot) {
+    console.log("Register robot called");
+    console.log("Robot: " + JSON.stringify(robot));
+
+    io.emit('robot-registered', robot);
+  });
+
+  socket.on('disconnect', function() {
+    console.log("Socket.IO client Disconnected");
+  })
 });
 
 var Robot = require('./app/models/robot');
