@@ -7,6 +7,8 @@ NorBotChallenge
 
 See https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
+    mongod.exe --dbpath c:\mongodb\data
+
 * Install Node.js (www.nodejs.org)
 * Clone this repository to local machine
 
