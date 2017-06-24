@@ -10,11 +10,25 @@
   </script>
   <script>
     $(function() {
+      //When page has loaded, register with the Socket.IO server, so that we receive updates in realtime.
       var socket = io();
-
         socket.on('robot-registered', function(robot) {
           $('table tr:last').after('<tr><td>' + robot.name + '</td><td>' + robot.owner + '</td></tr>');
         })
+
+
+      //When page has loaded, get all the registered robots from the REST api, and fill the table.
+      //$(document).ready(function() {
+      $.ajax({
+        type :"GET",
+        url: "http://localhost:8080/api/robots"
+    }).then(function(robots) {
+      for (var i = 0; i < robots.length; i++) {
+        var robot = robots[i];
+        $('table tr:last').after('<tr><td>' + robot.name + '</td><td>' + robot.owner + '</td></tr>');
+      }
+    //});
+});
 
     });
   </script>

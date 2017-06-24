@@ -22,6 +22,8 @@ mongoose.connect(mongoDbUrl, function(err, db) {
    console.log("Connected to MongoDB server...");
  });
 
+var Robot = require('./app/models/robot');
+
 io.on('connection', function(socket){
   console.log("A Socket.IO client just connected!");
 
@@ -29,6 +31,15 @@ io.on('connection', function(socket){
     console.log("Register robot called");
     console.log("Robot: " + JSON.stringify(robot));
 
+    //Save to database
+    var r = new Robot();
+    r.name = robot.name;
+    r.save(function(err) {
+      if (err)
+        throw err;
+    });
+
+    //Inform any listening clients
     io.emit('robot-registered', robot);
   });
 
@@ -37,7 +48,7 @@ io.on('connection', function(socket){
   })
 });
 
-var Robot = require('./app/models/robot');
+
 
 mongoose.Promise = global.Promise;
 //mongoose.Promise = require('bluebird');
