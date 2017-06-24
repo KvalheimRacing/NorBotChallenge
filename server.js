@@ -34,6 +34,9 @@ io.on('connection', function(socket){
     //Save to database
     var r = new Robot();
     r.name = robot.name;
+    r.owner = robot.owner;
+    r.team = robot.team;
+    r.country = robot.country;
     r.save(function(err) {
       if (err)
         throw err;
