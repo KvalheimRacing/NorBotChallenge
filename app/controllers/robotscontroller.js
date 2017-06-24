@@ -23,3 +23,12 @@ exports.create_robot = function(req, res) {
 
   res.sendStatus(200);
 }
+
+exports.delete_all_robots = function(req, res) {
+  Robot.remove({}, function(err) {
+    if (err)
+      res.send(err);
+  });
+
+  res.sendStatus(200);
+}

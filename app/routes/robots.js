@@ -17,6 +17,11 @@ router.post('/api/robots', function(req, res) {
 
   robotscontroller.create_robot(req, res);
   //res.json({message: "post ok"});
-})
+});
+
+router.delete('/api/robots', function(req, res) {
+  console.log("DELETE called for ALL robots");
+  robotscontroller.delete_all_robots(req, res);
+});
 
 module.exports = router

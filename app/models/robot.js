@@ -5,6 +5,8 @@ var RobotSchema = new Schema({
     type: String,
     Required: 'A robot must have a name'
   },
+  owner: String,
+  team: String,
   createddate: {
     type: Date,
     default: Date.now
