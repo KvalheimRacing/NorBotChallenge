@@ -25,24 +25,35 @@ exports.create_robot = function(req, res) {
       res.sendStatus(201);
     }
   });
-
 }
 
-exports.delete_robot_by_name = function(req, res) {
-  console.log("delete_robot_by_name called");
+// exports.delete_robot_by_name = function(req, res) {
+//   //console.log("delete_robot_by_name called");
+//   Robot.remove({
+//     name: req.params.name
+//   }, function(err) {
+//     if (err) res.send(err);
+//     else res.sendStatus(204);
+//   });
+// }
+
+exports.delete_robot_by_name = function(name) {
   Robot.remove({
-    name: req.params.name
+    name: name
   }, function(err) {
-    if (err) res.send(err);
-    else res.sendStatus(204);
+    if (err) return err;
+    else return true;
   });
+
+  return true;
 }
 
 exports.delete_all_robots = function(req, res) {
   Robot.remove({}, function(err) {
     if (err)
       res.send(err);
+    else {
+      res.sendStatus(204);
+    }
   });
-
-  res.sendStatus(204);
 }

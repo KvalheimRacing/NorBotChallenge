@@ -18,13 +18,14 @@ var mongoose = require('mongoose');
 var mongoDbUrl = config.mongodb || 'mongodb://localhost:27017/norbot';
 
 mongoose.connect(mongoDbUrl, function(err, db) {
-   assert.equal(null, err);
-   console.log("Connected to MongoDB server...");
- });
+  assert.equal(null, err);
+  console.log("Connected to MongoDB server...");
+});
 
 var Robot = require('./app/models/robot');
+var robotscontroller = require('./app/controllers/robotscontroller');
 
-io.on('connection', function(socket){
+io.on('connection', function(socket) {
   console.log("A Socket.IO client just connected!");
 
   socket.on('register-robot', function(robot) {
@@ -46,6 +47,16 @@ io.on('connection', function(socket){
     io.emit('robot-registered', robot);
   });
 
+  socket.on('delete-robot', function(robot) {
+
+    var result = robotscontroller.delete_robot_by_name(robot.name);
+    if (result == true)
+      io.emit('robot-deleted', robot);
+    else {
+      console.log(result);
+    }
+  });
+
   socket.on('disconnect', function() {
     console.log("Socket.IO client Disconnected");
   })
@@ -60,7 +71,9 @@ app.set('views', path.join(__dirname, 'app/views'));
 app.set('view engine', 'pug');
 
 //Configure Express to use the body-parser
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 
 app.use(express.static('app/public'));
@@ -69,7 +82,10 @@ app.use(require('./app/routes/robots'));
 app.use(require('./app/controllers'));
 
 app.get("/admin", function(req, res) {
-  res.render('admin', {title: "Hello Admin", message: "something"});
+  res.render('admin', {
+    title: "Hello Admin",
+    message: "something"
+  });
 })
 
 // app.get('/test', function(req, res) {

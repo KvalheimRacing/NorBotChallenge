@@ -16,6 +16,11 @@
         $('table tr:last').after('<tr><td>' + robot.name + '</td><td>' + robot.owner + '</td></tr>');
       })
 
+      socket.on('robot-deleted', function(robot) {
+        console.log("Removing robot " + robot.name);
+        $('table').empty();
+      })
+
 
       //When page has loaded, get all the registered robots from the REST api, and fill the table.
       //$(document).ready(function() {
@@ -28,6 +33,14 @@
           var created = moment(robot.createddate, moment.ISO_8601).fromNow();
           $('table tr:last').after('<tr><td>' + robot.name + '</td><td>' + robot.owner + '</td><td>' + created + '</td></tr>');
         }
+      });
+
+      //Add eventhandler for Delete button
+      $('#deleteAllButton').click(function(){
+        //Tell backend to delete all
+        var robot = {name: "hans"};
+        socket.emit('delete-robot', robot);
+        return false;
       });
 
     });
@@ -48,6 +61,8 @@
         <th>Created</th>
       </tr>
     </table>
+
+    <button name='deleteAllButton' id='deleteAllButton' class='btn btn-alert'>Delete all</button>
   </div>
 
 </body>

@@ -19,7 +19,11 @@ See https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
 * Start the backend server
 
-      node server.js
+      node server.js (for one time start)
+
+      or
+
+      npm run start (for automatic retart during development)
 
 * Browse to http://localhost:3000
 
