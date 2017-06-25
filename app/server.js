@@ -1,3 +1,9 @@
+/*
+ * This is the main startup point for the entire app.
+ * Express is started (at port 8080) and handles incoming HTTP-requests.
+ * All requests going to /api is handled by the REST API, which in turn uses the MongoDB database.
+ * All other requests are treated as requests for resources, like webpages, scripts, etc.
+ */
 //Generic
 var config = require('./config.json');
 var assert = require('assert');
@@ -16,15 +22,16 @@ var bodyParser = require('body-parser');
 //Database
 var mongoose = require('mongoose');
 var mongoDbUrl = config.mongodb || 'mongodb://localhost:27017/norbot';
-
+console.log("Connecting to " + mongoDbUrl);
 mongoose.connect(mongoDbUrl, function(err, db) {
   assert.equal(null, err);
   console.log("Connected to MongoDB server...");
 });
 
-var Robot = require('./app/models/robot');
-var robotscontroller = require('./app/controllers/robotscontroller');
+var Robot = require('./models/robot');
+var robotscontroller = require('./controllers/robotscontroller');
 
+//Socket.IO connection.
 io.on('connection', function(socket) {
   console.log("A Socket.IO client just connected!");
 
@@ -67,7 +74,10 @@ io.on('connection', function(socket) {
 mongoose.Promise = global.Promise;
 //mongoose.Promise = require('bluebird');
 
-app.set('views', path.join(__dirname, 'app/views'));
+/********* CONFIGURE EXPRESS *********/
+//Use Pug as the template engine
+console.log(__dirname);
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 //Configure Express to use the body-parser
@@ -76,10 +86,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.use(express.static('app/public'));
-
-app.use(require('./app/routes/robots'));
-app.use(require('./app/controllers'));
+//Configure express to serve static files
+app.use(express.static('app/static_files'));
+app.use(require('./routes/robots'));
+app.use(require('./controllers'));
 
 app.get("/admin", function(req, res) {
   res.render('admin', {

@@ -1,3 +1,3 @@
 {
-  "directory": "app/public/libs"
+  "directory": "app/static_files/bower_libs"
 }

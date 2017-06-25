@@ -19,6 +19,10 @@ See https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
       npm install
 
+* Get all clientside libraries
+
+      bower install
+
 * Start the backend server
 
       node server.js (for one time start)
@@ -45,7 +49,7 @@ Main components:
 5. Event information
 6. Administration
 
-- 'must be able to' - critical 
+- 'must be able to' - critical
 - 'want to'         - should be implemented
 - 'wish'            - nice-to-have functionality
 - 'organizer'       - someone who works in NorBot/Teknisk Museum
@@ -78,14 +82,14 @@ User stories:
 ### 4 Live Folkrace (lap counter)
 * As a participant I need to be able to see the finalresults
 * As a participant I want to see the scores as they are given during the race
- * Either automatically increment/decrement scores using an automatic lap timer-system, 
+ * Either automatically increment/decrement scores using an automatic lap timer-system,
  * or manualy by judges during race
 * As a participant I need to be able to see the 3 min counter
 * As a participant I wish I could view the results live on my phone
 * As an organizer I need to be able to quickly determine who won the heats and entire competition
 * As an organizer I need to be able to start and stop the race
- 
- ### 5 Event information
+
+### 5 Event information
  * As a participant I need to be able to find directions
   * Google Maps
   * Public transport information
