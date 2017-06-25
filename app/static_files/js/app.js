@@ -8,8 +8,8 @@ var app = new Vue({
 
       var socket = io();
       socket.on('robot-registered', function(robot) {
-        //$('table tr:last').after('<tr><td>' + robot.name + '</td><td>' + robot.owner + '</td></tr>');
-        console.log("ROBOT REGISTERED!");
+        app.robots.push(robot);
+        console.log("Vue discovered that robot was added!");
       })
    },
   methods: {
