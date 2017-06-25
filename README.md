@@ -40,13 +40,20 @@ https://www.terlici.com/2014/08/25/best-practices-express-structure.html
 Main components:
 1. Team registration
 2. Robot registration/weigh-in at the event
-2. Live schedule and results
-3. Live Folkrace lap counter
+3. Live schedule and results
+4. Live Folkrace lap counter
+5. Event information
 
+- 'must be able to' - critical 
+- 'want to'         - should be implemented
+- 'wish'            - nice-to-have functionality
+- 'organizer'       - someone who works in NorBot/Teknisk Museum
+- 'participant'     - someone who has buillt a robot and competes
+- 'visitor'         - someone who just watches/visits Teknisk Museum for the day
 
 ### 1 Team Registration
 User stories:
-* As a contestant, I want to register my team
+[ ] As a contestant, I want to register my team
  * Team name
  * Name, email and phone number for every team member (at least one)
  * Robot name and type/class (at least one)
@@ -61,3 +68,27 @@ User stories:
  * One per robot or one per team?
 * As a contestant, I want to identify myself to the event organizer at weigh-in using my identifier.
 * As an organizer, I want to approve the robot at weigh-in by scanning the identifier.
+
+### 3 Live schedule and results
+* As a contestant, I want to see what the timetable for the day of the event looks like
+* As an organizer, I need to be able to update the schedule
+
+### 4 Live Folkrace (lap counter)
+* As a participant I need to be able to see the finalresults
+* As a participant I want to see the scores as they are given during the race
+ * Either automatically increment/decrement scores using an automatic lap timer-system, 
+ * or manualy by judges during race
+* As a participant I need to be able to see the 3 min counter
+* As a participant I wish I could view the results live on my phone
+* As an organizer I need to be able to quickly determine who won the heats and entire competition
+* As an organizer I need to be able to start and stop the race
+ 
+ ### 5 Event information
+ * As a participant I need to be able to find directions
+  * Google Maps
+  * Public transport information
+ * As a participant I need to know when the event starts and ends
+ * As a participant I need to be able to contact the organizers if I have a question
+ * As a participant I need to find the rules
+ * As a participant I need to know which competitions (folkrace, minisumo, linefollower, etc) there are
+ * As a participant/visitor I want to be able to easily find and like the NorBot facebook page
