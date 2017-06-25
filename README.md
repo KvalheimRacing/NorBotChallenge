@@ -53,7 +53,8 @@ Main components:
 
 ### 1 Team Registration
 User stories:
-[ ] As a contestant, I want to register my team
+
+* As a contestant, I want to register my team
  * Team name
  * Name, email and phone number for every team member (at least one)
  * Robot name and type/class (at least one)
