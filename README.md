@@ -43,6 +43,7 @@ Main components:
 3. Live schedule and results
 4. Live Folkrace lap counter
 5. Event information
+6. Administration
 
 - 'must be able to' - critical 
 - 'want to'         - should be implemented
@@ -93,3 +94,7 @@ User stories:
  * As a participant I need to find the rules
  * As a participant I need to know which competitions (folkrace, minisumo, linefollower, etc) there are
  * As a participant/visitor I want to be able to easily find and like the NorBot facebook page
+
+### 6 Administration
+* As an organizer I need to be able to login as administrator
+* As an organizer I wish I could send ad-hoc SMS's to one or more participants
