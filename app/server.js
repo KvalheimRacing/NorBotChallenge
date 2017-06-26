@@ -58,11 +58,10 @@ io.on('connection', function(socket) {
     robot.save(function(err) {
       if (err)
         console.log(err);
-        //res.send(err);
     });
 
     //Inform any listening clients
-    io.emit('robot-registered', registration);
+    io.emit('robot-registered', robot);
   });
 
   socket.on('delete-robot', function(robot) {
