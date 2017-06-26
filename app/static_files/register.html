@@ -43,8 +43,6 @@
 
 <body>
 
-
-
   <div class='container'>
     <div class='jumbotron'>
       <center>
@@ -65,7 +63,7 @@
 
     <form>
       <div class='form-group'>
-        <label for=robotname>Name of robot</label>
+        <label for=robotname class='control-label'>Name of robot</label>
         <input type='text' class='form-control' name='robotname' id='robotname' autocomplete='off'></input>
 
         <label for=owner>Fullname of the owner</label>
@@ -74,17 +72,23 @@
         <label for=owner>TeamName</label>
         <input type='text' class='form-control' name='teamname' id='teamname' autocomplete='off'></input>
 
-        <label for=owner>Country</label>
-        <input type='text' class='form-control' name='country' id='country' autocomplete='off'></input>
+        <div class="form-group">
+          <label for=owner>Country</label>
+          <input type='text' class='form-control' name='country' id='country' autocomplete='off'></input>
+        </div>
 
         <label for='something'>Toggle me</label>
         <input class='form-control' type="checkbox" checked data-toggle="toggle">
 
-        <div style='float: right;'>
-          <input type='submit' value='Register' class='btn btn-lg btn-info' />
+        <div class="form-group">
+          <div style='float: right;'>
+            <input type='submit' value='Register' class='btn btn-lg btn-primary' />
+          </div>
         </div>
+
       </div>
-    </form>
+  </div>
+  </form>
 
   </div>
 
