@@ -72,8 +72,15 @@ User stories:
 ### 2 Robot registration/check-in at the event
 * As a contestant, I want to register my robot and get an identifier (QR-code, RFID-card, etc) for the weigh-in.
  * One per robot or one per team?
+* As a contestant, it would be nice if I could easily choose my team if it has already been registered, to avoid duplicate teams.
 * As a contestant, I want to identify myself to the event organizer at weigh-in using my identifier.
 * As an organizer, I want to approve the robot at weigh-in by scanning the identifier.
+* As an organizer, I need to be able to edit and delet
+* As a contestant, I want to update my registration details
+* As a contestant, it would be nice if I could access "My page" to see info relevant for me
+..* See list of my heats
+..* Edit my robot details
+
 
 ### 3 Live schedule and results
 * As a contestant, I want to see what the timetable for the day of the event looks like
@@ -82,7 +89,7 @@ User stories:
 ### 4 Live Folkrace (lap counter)
 * As a participant I need to be able to see the finalresults
 * As a participant I want to see the scores as they are given during the race
- * Either automatically increment/decrement scores using an automatic lap timer-system,
+..* Either automatically increment/decrement scores using an automatic lap timer-system,
  * or manualy by judges during race
 * As a participant I need to be able to see the 3 min counter
 * As a participant I wish I could view the results live on my phone
