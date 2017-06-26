@@ -78,8 +78,8 @@ User stories:
 * As an organizer, I need to be able to edit and delet
 * As a contestant, I want to update my registration details
 * As a contestant, it would be nice if I could access "My page" to see info relevant for me
-..* See list of my heats
-..* Edit my robot details
+  * See list of my heats
+  * Edit my robot details
 
 
 ### 3 Live schedule and results
