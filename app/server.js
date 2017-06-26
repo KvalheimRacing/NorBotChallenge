@@ -29,29 +29,40 @@ mongoose.connect(mongoDbUrl, function(err, db) {
 });
 
 var Robot = require('./models/robot');
+var Team = require('./models/team');
 var robotscontroller = require('./controllers/robotscontroller');
 
 //Socket.IO connection.
 io.on('connection', function(socket) {
   console.log("A Socket.IO client just connected!");
 
-  socket.on('register-robot', function(robot) {
+  socket.on('register-robot', function(registration) {
     console.log("Register robot called");
-    console.log("Robot: " + JSON.stringify(robot));
+    console.log("registration: " + JSON.stringify(registration));
 
     //Save to database
-    var r = new Robot();
-    r.name = robot.name;
-    r.owner = robot.owner;
-    r.team = robot.team;
-    r.country = robot.country;
-    r.save(function(err) {
+    var team = new Team();
+    team._id = registration.team;
+    team.name = registration.team;
+    team.save(function(err){
       if (err)
-        res.send(err);
+        console.log(err);
+    })
+
+    var robot = new Robot();
+    robot.name = registration.name;
+    robot.owner = registration.owner;
+    robot.team = registration.team;
+    robot.country = registration.country;
+    robot._id = registration.name;
+    robot.save(function(err) {
+      if (err)
+        console.log(err);
+        //res.send(err);
     });
 
     //Inform any listening clients
-    io.emit('robot-registered', robot);
+    io.emit('robot-registered', registration);
   });
 
   socket.on('delete-robot', function(robot) {

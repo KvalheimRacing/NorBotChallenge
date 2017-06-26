@@ -75,12 +75,11 @@ User stories:
 * As a contestant, it would be nice if I could easily choose my team if it has already been registered, to avoid duplicate teams.
 * As a contestant, I want to identify myself to the event organizer at weigh-in using my identifier.
 * As an organizer, I want to approve the robot at weigh-in by scanning the identifier.
-* As an organizer, I need to be able to edit and delet
+* As an organizer, I need to be able to edit and delete robots
 * As a contestant, I want to update my registration details
 * As a contestant, it would be nice if I could access "My page" to see info relevant for me
   * See list of my heats
   * Edit my robot details
-
 
 ### 3 Live schedule and results
 * As a contestant, I want to see what the timetable for the day of the event looks like

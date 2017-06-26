@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var RobotSchema = new Schema({
+  _id: String,
   name: {
     type: String,
     Required: 'A robot must have a name',
@@ -12,7 +13,8 @@ var RobotSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  country: String
+  country: String,
+  participant_id: String
 });
 
 module.exports = mongoose.model('Robot', RobotSchema);
