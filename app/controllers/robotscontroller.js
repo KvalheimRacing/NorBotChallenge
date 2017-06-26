@@ -15,39 +15,51 @@ exports.list_all_robots = function(req, res) {
   });
 };
 
-exports.create_robot = function(data) {
+// exports.create_robot = function(data) {
+//
+//   var io = req.app.get('socketIO');
+//   io.emit('hello', 'robot created');
+//
+//   var robot = new Robot();
+//
+//   robot._id = data.name;
+//   robot.name = data.name;
+//   robot.owner = data.owner;
+//   robot.team = data.team;
+//   robot.country = data.country;
+//
+//   robot.save(function(err){
+//     if (err) return err;
+//     else {
+//       return robot;
+//     }
+//   })
+// };
+
+exports.create_robot = function(req, res) {
+
+  console.log("incoming call to create_robot");
 
   var robot = new Robot();
-
-  robot._id = data.name;
-  robot.name = data.name;
-  robot.owner = data.owner;
-  robot.team = data.team;
-  robot.country = data.country;
-
-  robot.save(function(err){
-    if (err) return err;
-    else {
-      return robot;
+  // robot.name = req.body.name;
+  // robot.country = req.body.country;
+  robot._id = req.body.name;
+  robot.name = req.body.name;
+  robot.owner = req.body.owner;
+  robot.team = req.body.team;
+  robot.country = req.body.country;
+  robot.save(function(err) {
+    if (err) {
+      //console.log("error while saving:");
+      //console.log(err);
+      res.send(err);
+    } else {
+      var io = req.app.get('socketIO');
+      io.emit('onRobotCreated', robot);
+      res.sendStatus(201);
     }
-  })
-};
-
-// exports.create_robot = function(req, res) {
-//   var robot = new Robot();
-//   robot.name = req.body.name;
-//   robot.country = req.body.country;
-//
-//   robot.save(function(err) {
-//     if (err) {
-//       //console.log("error while saving:");
-//       //console.log(err);
-//       res.send(err);
-//     } else {
-//       res.sendStatus(201);
-//     }
-//   });
-// }
+  });
+}
 
 // exports.delete_robot_by_name = function(req, res) {
 //   //console.log("delete_robot_by_name called");
@@ -64,11 +76,15 @@ exports.delete_robot_by_name = function(name) {
   Robot.remove({
     name: name
   }, function(err) {
-    if (err) return err;
-    else return true;
+    if (err) {
+      console.log(err)
+      return err;
+    } else {
+      return true;
+    }
   });
 
-  //return true;
+  return true;
 }
 
 exports.delete_all_robots = function(req, res) {

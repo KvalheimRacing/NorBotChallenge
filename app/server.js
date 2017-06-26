@@ -32,60 +32,60 @@ var Robot = require('./models/robot');
 var Team = require('./models/team');
 var robotscontroller = require('./controllers/robotscontroller');
 
-//Socket.IO connection.
-io.on('connection', function(socket) {
-  console.log("A Socket.IO client just connected!");
+//Save the io-object, so that it can be reused by the routes later.
+app.set('socketIO', io);
 
-  socket.on('register-robot', function(registration) {
-    console.log("Register robot called");
-    console.log("registration: " + JSON.stringify(registration));
-
-    //Save to database
-    var team = new Team();
-    team._id = registration.team;
-    team.name = registration.team;
-    team.save(function(err){
-      if (err)
-        console.log(err);
-    })
-
-    // var robot = new Robot();
-    // robot.name = registration.name;
-    // robot.owner = registration.owner;
-    // robot.team = registration.team;
-    // robot.country = registration.country;
-    // robot._id = registration.name;
-    // robot.save(function(err) {
-    //   if (err)
-    //     console.log(err);
-    // });
-    var robot = robotscontroller.create_robot(registration);
-    if (robot != true)
-      console.log(robot);
-
-    //Inform any listening clients
-    io.emit('robot-registered', robot);
-  });
-
-  socket.on('delete-robot', function(robot) {
-
-    var result = robotscontroller.delete_robot_by_name(robot.name);
-    if (result == true)
-      io.emit('robot-deleted', robot);
-    else {
-      console.log(result);
-    }
-  });
-
-  socket.on('disconnect', function() {
-    console.log("Socket.IO client Disconnected");
-  })
-});
-
-
+// //Socket.IO connection.
+// io.on('connection', function(socket) {
+//   console.log("A Socket.IO client just connected!");
+//
+//   socket.on('register-robot', function(registration) {
+//     console.log("Register robot called");
+//     console.log("registration: " + JSON.stringify(registration));
+//
+//     //Save to database
+//     var team = new Team();
+//     team._id = registration.team;
+//     team.name = registration.team;
+//     team.save(function(err){
+//       if (err)
+//         console.log(err);
+//     })
+//
+//     // var robot = new Robot();
+//     // robot.name = registration.name;
+//     // robot.owner = registration.owner;
+//     // robot.team = registration.team;
+//     // robot.country = registration.country;
+//     // robot._id = registration.name;
+//     // robot.save(function(err) {
+//     //   if (err)
+//     //     console.log(err);
+//     // });
+//     var robot = robotscontroller.create_robot(registration);
+//     if (robot != true)
+//       console.log(robot);
+//
+//     //Inform any listening clients
+//     io.emit('robot-registered', robot);
+//   });
+//
+//   socket.on('delete-robot', function(robot) {
+//
+//     var result = robotscontroller.delete_robot_by_name(robot.name);
+//     if (result == true)
+//       io.emit('robot-deleted', robot);
+//     else {
+//       console.log(result);
+//     }
+//   });
+//
+//   socket.on('disconnect', function() {
+//     console.log("Socket.IO client Disconnected");
+//   })
+// });
 
 mongoose.Promise = global.Promise;
-//mongoose.Promise = require('bluebird');
 
 /********* CONFIGURE EXPRESS *********/
 //Use Pug as the template engine
@@ -104,92 +104,13 @@ app.use(express.static('app/static_files'));
 app.use(require('./routes/robots'));
 app.use(require('./controllers'));
 
+//Testing Pug
 app.get("/admin", function(req, res) {
   res.render('admin', {
     title: "Hello Admin",
     message: "something"
   });
 })
-
-// app.get('/test', function(req, res) {
-//   Robot.find({}, function(err, robots){
-//     if (err)
-//       res.send(err);
-//
-//     res.send(robots);
-//     //res.json({found: "something"});
-//   });
-//   //res.json({allright: "there"});
-// });
-/*
-//Router middleware
-router.use(function(req, res, next) {
-  console.log("Incoming request captured by middleware...");
-  next();
-});
-
-//Web API routing
-router.get('/', function (req, res) {
-  console.log("Route / called...");
-
-  // mongo.connect(mongoDbUrl, function(err, db) {
-  //   assert.equal(null, err);
-  //   console.log("Connected to MongoDB server...");
-  //
-  //   insertRobot(db, function() {
-  //     db.close();
-  //   });
-  // });
-
-  res.json({message: 'not used'});
-})
-
-router.route('/robots')
-.post(function(req, res){
-  //Create a robot
-  //console.log("/robots called using POST")
-  var robot = new Robot();
-  robot.name = req.body.name;
-  robot.save(function(err) {
-     if (err)
-       res.send(err);
-
-     res.json({message: 'Robot created'});
-   });
-
-   res.json({"message": "Was robot " + robot.name + " created?"});
-}).get(function(req, res) {
-  //Get ALL robots
-  console.log("GET");
-  Robot.find(function(err, robots) {
-    console.log("find...");
-    if (err)
-      res.send(err);
-
-    res.json(robots);
-  });
-
-  res.json({test:"test2"});
-});
-
-router.route('/robots/:robot_id')
-  .get(function(req, res) {
-    Robot.findById(req.params.robot_id, function(err, robot) {
-      if (err)
-        res.send(err);
-      res.json(robot);
-    });
-
-    //res.json({robot: "somerobot"});
-  });
-
-//Get all robots
-
-
-//Fire up Express Webserver
-app.use("/api", router);
-
-*/
 
 var port = config.port || 8080;
 server.listen(port, function() {

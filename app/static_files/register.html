@@ -24,22 +24,22 @@
       })
 
 
-      $('form').submit(function() {
-        //Pass the robot to the backenserver
-        var robot = {
-          name: $('#robotname').val(),
-          owner: $('#ownername').val(),
-          country: $('#country').val(),
-          team: $('#teamname').val()
-        };
-        //socket.emit('register-robot', $('#robotname').val());
-        socket.emit('register-robot', robot);
-
-        //Clear form
-        $('#robotname').val('');
-        $('#ownername').val('');
-        return false;
-      });
+      // $('form').submit(function() {
+      //   //Pass the robot to the backenserver
+      //   var robot = {
+      //     name: $('#robotname').val(),
+      //     owner: $('#ownername').val(),
+      //     country: $('#country').val(),
+      //     team: $('#teamname').val()
+      //   };
+      //   //socket.emit('register-robot', $('#robotname').val());
+      //   socket.emit('register-robot', robot);
+      //
+      //   //Clear form
+      //   $('#robotname').val('');
+      //   $('#ownername').val('');
+      //   return false;
+      // });
     });
   </script>
 </head>
@@ -67,10 +67,10 @@
     <form>
       <div class='form-group'>
         <label for=robotname class='control-label'>Name of robot</label>
-        <input type='text' class='form-control' name='robotname' id='robotname' autocomplete='off'></input>
+        <input type='text' class='form-control' name='robotname' id='robotname' autocomplete='off' v-model='robot.name'></input>
 
         <label for=owner>Fullname of the owner</label>
-        <input type='text' class='form-control' name='ownername' id='ownername' autocomplete='off'></input>
+        <input type='text' class='form-control' name='ownername' id='ownername' autocomplete='off' v-model='robot.owner'></input>
 
         <label for=owner>TeamName</label>
         <input type='text' class='form-control' name='teamname' id='teamname' autocomplete='off'></input>
@@ -90,7 +90,7 @@
 
         <div class="form-group">
           <div style='float: right;'>
-            <input type='submit' value='Register' class='btn btn-lg btn-primary' />
+            <input type='submit' value='Register' class='btn btn-lg btn-primary' v-on:click.prevent='registerRobot(robot);'/>
           </div>
         </div>
 

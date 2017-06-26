@@ -13,9 +13,13 @@ var app = new Vue({
 
     //Hook up Socket.IO to listen for any new robots
     var socket = io();
-    socket.on('robot-registered', function(robot) {
+    socket.on('onRobotCreated', function(robot) {
       app.robots.push(robot);
       console.log("Vue discovered that robot was added!");
+    });
+
+    socket.on('hello', function(data){
+      console.log(data);
     })
   },
   // watch: {
