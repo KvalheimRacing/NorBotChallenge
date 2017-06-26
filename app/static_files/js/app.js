@@ -51,6 +51,9 @@ var app = new Vue({
             }
 
           },
+          getHumanTime: function(datetime) {
+            return moment(datetime, moment.ISO_8601).fromNow();
+          },
           loadRobots: function() {
             //Get all robots from backend REST API
             this.$http.get('/api/robots').then(function(response) {
