@@ -33,6 +33,8 @@
       <i>List is initially loaded via REST API, then the list is updated in realtime using Socket.IO</i>
     </div>
 
+    <input class='form-control' type='text' placeholder='Type to filter...' v-model='filtertext' />
+
     <table class='table table-striped table-hover'>
       <tr>
         <th>_id</th>
@@ -41,7 +43,7 @@
         <th>Created</th>
         <th></th>
       </tr>
-      <tr v-for="robot in robots">
+      <tr v-for="robot in filteredRobots()">
         <td>{{robot._id}}</td>
         <td>{{robot.name}}</td>
         <td>{{robot.owner}}</td>
@@ -49,12 +51,14 @@
         <td>
           <div class="btn-group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-    Action <span class="caret"></span>
-  </button>
+ Action <span class="caret"></span>
+</button>
             <ul class="dropdown-menu">
               <li><a href="#">Edit<span class='glyphicon glyphicon-pencil pull-right'></span></a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#" v-on:click='deleteRobot(robot)'>Delete<span class='glyphicon glyphicon-trash pull-right'></span></a></li>
+              <li v-bind:class='{disabled: !rightCanDeleteRobot}'>
+                <a v-bind:title='getRightsTooltip(rightCanDeleteRobot, "Click to delete")' href="#" v-on:click.prevent='deleteRobot(robot)'>Delete<span class='glyphicon glyphicon-trash pull-right'></span></a>
+              </li>
             </ul>
           </div>
         </td>
