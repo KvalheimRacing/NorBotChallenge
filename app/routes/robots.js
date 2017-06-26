@@ -1,3 +1,6 @@
+/*
+ * This file is responsible for mapping HTTP routes to methods on Controllers.
+ */
 'use strict';
 var express = require('express');
 var router = express.Router();
@@ -17,7 +20,7 @@ router.delete('/api/robots', function(req, res) {
 });
 
 router.delete('/api/robots/:name', function(req,res) {
-  console.log("delete a single robot by name called");
+  //console.log("delete a single robot by name called");
   //console.log(JSON.stringify(req));
   if (robotscontroller.delete_robot_by_name(req.params.name) == true)
     res.sendStatus(200);

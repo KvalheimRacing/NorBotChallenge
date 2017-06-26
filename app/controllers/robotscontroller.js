@@ -1,3 +1,7 @@
+/*
+ * This file is responsible to all CRUD operations for robos
+ * IF you need to create, change, get etc robots, then that is done by this file
+ */
 var mongoose = require('mongoose');
 var Robot = mongoose.model('Robot');
 
@@ -11,21 +15,39 @@ exports.list_all_robots = function(req, res) {
   });
 };
 
-exports.create_robot = function(req, res) {
-  var robot = new Robot();
-  robot.name = req.body.name;
-  robot.country = req.body.country;
+exports.create_robot = function(data) {
 
-  robot.save(function(err) {
-    if (err) {
-      //console.log("error while saving:");
-      //console.log(err);
-      res.send(err);
-    } else {
-      res.sendStatus(201);
+  var robot = new Robot();
+
+  robot._id = data.name;
+  robot.name = data.name;
+  robot.owner = data.owner;
+  robot.team = data.team;
+  robot.country = data.country;
+
+  robot.save(function(err){
+    if (err) return err;
+    else {
+      return robot;
     }
-  });
-}
+  })
+};
+
+// exports.create_robot = function(req, res) {
+//   var robot = new Robot();
+//   robot.name = req.body.name;
+//   robot.country = req.body.country;
+//
+//   robot.save(function(err) {
+//     if (err) {
+//       //console.log("error while saving:");
+//       //console.log(err);
+//       res.send(err);
+//     } else {
+//       res.sendStatus(201);
+//     }
+//   });
+// }
 
 // exports.delete_robot_by_name = function(req, res) {
 //   //console.log("delete_robot_by_name called");

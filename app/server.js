@@ -49,16 +49,19 @@ io.on('connection', function(socket) {
         console.log(err);
     })
 
-    var robot = new Robot();
-    robot.name = registration.name;
-    robot.owner = registration.owner;
-    robot.team = registration.team;
-    robot.country = registration.country;
-    robot._id = registration.name;
-    robot.save(function(err) {
-      if (err)
-        console.log(err);
-    });
+    // var robot = new Robot();
+    // robot.name = registration.name;
+    // robot.owner = registration.owner;
+    // robot.team = registration.team;
+    // robot.country = registration.country;
+    // robot._id = registration.name;
+    // robot.save(function(err) {
+    //   if (err)
+    //     console.log(err);
+    // });
+    var robot = robotscontroller.create_robot(registration);
+    if (robot != true)
+      console.log(robot);
 
     //Inform any listening clients
     io.emit('robot-registered', robot);
