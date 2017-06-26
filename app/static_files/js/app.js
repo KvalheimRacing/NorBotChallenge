@@ -16,6 +16,16 @@ var app = new Vue({
     reverseList: function() {
       this.robots.reverse();
     },
+    deleteRobot: function(robot) {
+      //Call on the backend REST API to delete the robot
+      this.$http.delete('/api/robots/' + robot.name).then(function(response) {
+        //alert('ok');
+      });
+
+      //Remove from local array on page
+      var index = this.robots.indexOf(robot);
+      this.robots.splice(index, 1);
+    },
     loadRobots: function() {
       //Get all robots from backend REST API
       this.$http.get('/api/robots').then(function(response){

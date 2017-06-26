@@ -38,6 +38,7 @@ exports.create_robot = function(req, res) {
 // }
 
 exports.delete_robot_by_name = function(name) {
+  console.log("delete_robot_by_name(" + name + ")");
   Robot.remove({
     name: name
   }, function(err) {
@@ -45,7 +46,7 @@ exports.delete_robot_by_name = function(name) {
     else return true;
   });
 
-  return true;
+  //return true;
 }
 
 exports.delete_all_robots = function(req, res) {
