@@ -5,6 +5,7 @@
 var express = require('express');
 var router = express.Router();
 var robotscontroller = require('../controllers/robotscontroller');
+var teamsController = require('../controllers/teamscontroller');
 
 router.get('/api/robots', function(req, res) {
   robotscontroller.list_all_robots(req, res);
@@ -28,5 +29,14 @@ router.delete('/api/robots/:name', function(req,res) {
     res.sendStatus(500);
   }
 });
+
+router.get('/api/teams', function(req, res){
+  // var teams =
+  teamsController.get_all_teams(req, res);
+  // if (teams)
+  //   res.json(teams);
+  // else
+  //   res.send(teams);
+})
 
 module.exports = router
