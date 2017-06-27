@@ -32,10 +32,13 @@ var app = new Vue({
     teamSelected: function(team) {
       console.log('Team selected: ' + team.name);
     },
-    registerRobot: function(robot) {
+    registerRobot: function(registration) {
       //alert('todo: post to server' + robot.name);
-      this.$http.post('/api/robots', robot).then(function(response){
-        console.log("done");
+      this.$http.post('/api/robots', registration).then(function(response){
+        console.log("Robot created");
+        this.$http.post('/api/teams', registration).then(function(response){
+          console.log("Team created");
+        })
       })
     }
   }

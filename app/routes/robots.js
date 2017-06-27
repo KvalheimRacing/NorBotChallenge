@@ -43,6 +43,10 @@ router.get('/api/teams', function(req, res){
   //   res.json(teams);
   // else
   //   res.send(teams);
+});
+
+router.post('/api/teams', function(req, res) {
+  teamsController.create_team(req, res);
 })
 
 module.exports = router
