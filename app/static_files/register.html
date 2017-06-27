@@ -55,12 +55,16 @@
       <el-card class="box-card">
 
         <el-form-item label='Name of robot'>
-          <el-input v-model='registration.robotname' placeholder='R2D2?'>
+          <el-input v-model='registration.robotname' placeholder='(Clever name goes here)'>
         </el-form-item>
 
-        <el-form-item label='Team'>
-          <!-- <el-input v-model='registration.teamname' placeholder='Choose existing team, or create a new one.'></el-input> -->
-          <el-autocomplete class="inline-input" v-model="registration.teamname" :fetch-suggestions="getTeams" placeholder="Choose or create team" @select="teamSelected" icon='search' :props="{label: 'name', value:'name'}"></el-autocomplete>
+        <el-form-item label='Competitions'>
+          <template>
+          <el-select v-model="registration.competitions" multiple placeholder="One or more">
+            <el-option v-for="item in competitions" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </template>
         </el-form-item>
 
       </el-card>
@@ -78,6 +82,13 @@
             <el-input placeholder="Lastname" v-model="registration.humanlastname" style="width: 100%;"></el-input>
           </el-col>
         </el-form-item>
+
+        <el-form-item label='Team'>
+          <!-- <el-input v-model='registration.teamname' placeholder='Choose existing team, or create a new one.'></el-input> -->
+          <el-autocomplete class="inline-input" v-model="registration.teamname" :fetch-suggestions="getTeams" placeholder="Choose or create new team" @select="teamSelected" icon='search' :props="{label: 'name', value:'name'}"></el-autocomplete>
+        </el-form-item>
+
+        <!-- <el-progress type="circle" v-bind:percentage='progress'></el-progress> -->
 
         <el-form-item label='Country'>
         </el-form-item>
