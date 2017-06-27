@@ -4,7 +4,6 @@
   "description": "Backend and frontend",
   "main": "server.js",
   "dependencies": {
-    "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "humanize-plus": "^1.8.2",
