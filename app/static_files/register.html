@@ -69,6 +69,8 @@
 
       </el-card>
 
+      <el-button type="primary" icon="plus" style='margin-top: 20px;'>Add another robot</el-button>
+
       <div style='min-height: 30px;'></div>
 
       <el-card class="box-card">
@@ -103,9 +105,14 @@
             <template slot="prepend">@</template></el-input>
           </el-input>
         </el-form-item>
+
+
       </el-card>
 
-      <el-button type="primary" size="large" v-on:click.prevent='registerRobot(registration);'>Submit registration</el-button>
+      <el-button type="primary" icon="plus" style='margin-top: 20px;'>Add another team member</el-button>
+
+      <div style='min-height: 50px;'>&nbsp;</div>
+      <el-button type="primary" size="large" v-on:click.prevent='registerRobot(registration);' style='float: right;' icon='caret-right'>Submit registration</el-button>
     </el-form>
 
     <!-- <form>
