@@ -1,4 +1,25 @@
-NorBotChallenge
+# NorBot Challenge
+
+http://www.norbotchallenge.org
+
+This is the website used during NorBot Challenge. It contains both the public-facing side, the internal admin system, and the tv-screen system.
+
+## Technologies used
+
+### Backend
+- Node.JS + Express, for webserver
+- MongoDB, for database
+
+### Frontend
+- Plain HTML / CSS
+- Vue.JS (https://vuejs.org/), to make the UI intelligent
+- Element.IO (http://element.eleme.io), to make the UI pretty
+- Socket.IO (https://socket.io/), to add live-updates
+- MomentJS (http://momentjs.com/), for parsing datetime
+
+### Development tools
+- npm, bower, nodemon
+
 
 ## Installing
 
