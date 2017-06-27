@@ -1,10 +1,16 @@
 var app = new Vue({
   el: '#app',
   data: {
-    robot: {
-      name: '',
-      owner: '',
+    registration: {
+      robotname: '',
+      humanfirstname: '',
+      humanlastname: '',
+      teamname: ''
     },
+    // robot: {
+    //   name: '',
+    //   owner: '',
+    // },
     teams: []
   },
   mounted: function() { //Fired as soon as page is done loading
@@ -15,6 +21,16 @@ var app = new Vue({
       this.$http.get('/api/teams').then(function(response) {
         this.teams = response.data;
       })
+    },
+    getTeams: function(search, callback) {
+      //var result = [{value: "test", link: "http://www.vg.no"}];
+      //callback(result);
+      callback(this.teams.sort(function(a, b) {
+        return a.name.toLowerCase() > b.name.toLowerCase();
+      }));
+    },
+    teamSelected: function(team) {
+      console.log('Team selected: ' + team.name);
     },
     registerRobot: function(robot) {
       //alert('todo: post to server' + robot.name);

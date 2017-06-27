@@ -42,7 +42,8 @@ var app = new Vue({
       return this.robots.filter(function(robot) {
         //Compares each of the elements in the robot list, with the filtervalue.
         return robot.name.toLowerCase().indexOf(value) !== -1 ||
-          robot.owner.toLowerCase().indexOf(value) !== -1;
+          robot.owner.toLowerCase().indexOf(value) !== -1 ||
+          robot.team.toLowerCase().indexOf(value) !== -1;
       });
     },
     deleteRobot: function(robot) {

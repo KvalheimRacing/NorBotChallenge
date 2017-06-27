@@ -41,12 +41,10 @@ exports.create_robot = function(req, res) {
   console.log("incoming call to create_robot");
 
   var robot = new Robot();
-  // robot.name = req.body.name;
-  // robot.country = req.body.country;
-  robot._id = req.body.name;
-  robot.name = req.body.name;
-  robot.owner = req.body.owner;
-  robot.team = req.body.team;
+  robot._id = req.body.robotname;
+  robot.name = req.body.robotname;
+  robot.owner = req.body.humanfirstname + ' ' + req.body.humanlastname;
+  robot.team = req.body.teamname;
   robot.country = req.body.country;
   robot.save(function(err) {
     if (err) {

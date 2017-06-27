@@ -10,11 +10,10 @@
   <script src='bower_libs/bootstrap-toggle/js/bootstrap-toggle.min.js'></script>
   <script src='bower_libs/vue/dist/vue.js'></script>
   <script src='bower_libs/vue-resource/dist/vue-resource.js'></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <script src='js/register.js' defer></script>
 
-  <!-- <script>
-    var socket = io();
-  </script> -->
   <script>
     $(function() {
       var socket = io();
@@ -22,24 +21,6 @@
       socket.on('robot-registered', function(robot) {
         console.log("A new robot was created on the server!");
       })
-
-
-      // $('form').submit(function() {
-      //   //Pass the robot to the backenserver
-      //   var robot = {
-      //     name: $('#robotname').val(),
-      //     owner: $('#ownername').val(),
-      //     country: $('#country').val(),
-      //     team: $('#teamname').val()
-      //   };
-      //   //socket.emit('register-robot', $('#robotname').val());
-      //   socket.emit('register-robot', robot);
-      //
-      //   //Clear form
-      //   $('#robotname').val('');
-      //   $('#ownername').val('');
-      //   return false;
-      // });
     });
   </script>
 </head>
@@ -62,41 +43,101 @@
       <li role="presentation"><a href="#">Login</a></li>
       <li role="presentation"><a href="robotlist.html">List robots</a></li>
     </ul>
-    <h1>Register robot</h1>
+    <!-- <h1>Register robot</h1> -->
 
-    <form>
+    <div style='margin: 30 0 30 0;'>
+      <i>Bacon ipsum dolor amet short ribs jowl drumstick pig turkey chuck short loin hamburger flank andouille beef ribs. Shankle venison alcatra, picanha t-bone pork chop andouille meatball. Shoulder brisket tri-tip pastrami alcatra hamburger bacon beef t-bone jerky ham fatback porchetta filet mignon. Flank pork loin chuck, alcatra pig ham hock prosciutto meatloaf porchetta cupim chicken sausage tongue strip steak boudin. Bacon shoulder tenderloin sirloin hamburger porchetta pork. Ball tip pork chop strip steak.</i>
+    </div>
+
+    <el-form ref='form' :model='registration' label-width="120px">
+
+
+      <el-card class="box-card">
+
+        <el-form-item label='Name of robot'>
+          <el-input v-model='registration.robotname' placeholder='R2D2?'>
+        </el-form-item>
+
+        <el-form-item label='Team'>
+          <!-- <el-input v-model='registration.teamname' placeholder='Choose existing team, or create a new one.'></el-input> -->
+          <el-autocomplete class="inline-input" v-model="registration.teamname" :fetch-suggestions="getTeams" placeholder="Choose or create team" @select="teamSelected" icon='search' :props="{label: 'name', value:'name'}"></el-autocomplete>
+        </el-form-item>
+
+      </el-card>
+
+      <div style='min-height: 30px;'></div>
+
+      <el-card class="box-card">
+
+        <el-form-item label="Participant">
+          <el-col :span="8">
+            <el-input placeholder="Firstname" v-model="registration.humanfirstname" style="width: 100%;"></el-input>
+          </el-col>
+          <el-col class="line" :span="1">&nbsp;</el-col>
+          <el-col :span="8">
+            <el-input placeholder="Lastname" v-model="registration.humanlastname" style="width: 100%;"></el-input>
+          </el-col>
+        </el-form-item>
+
+        <el-form-item label='Country'>
+        </el-form-item>
+
+        <el-form-item label='Mobile phone'>
+          <el-input placeholder='Used to receive notifications, and log in' v-model='registration.phone'>
+          </el-input>
+        </el-form-item>
+
+        <el-form-item label='E-mail address'>
+          <el-input placeholder='Used to receive notifications, and log in' v-model='registration.email'>
+            <template slot="prepend">@</template></el-input>
+          </el-input>
+        </el-form-item>
+      </el-card>
+
+      <el-button type="primary" size="large" v-on:click.prevent='registerRobot(registration);'>Submit registration</el-button>
+    </el-form>
+
+    <!-- <form>
       <div class='form-group'>
-        <label for=robotname class='control-label'>Name of robot</label>
-        <input type='text' class='form-control' name='robotname' id='robotname' autocomplete='off' v-model='robot.name'></input>
+        <el-card class="box-card">
+          <label for=robotname class='control-label'>Name of robot</label>
+          <input type='text' class='form-control' name='robotname' id='robotname' autocomplete='off' v-model='robot.name'></input>
 
-        <label for=owner>Fullname of the owner</label>
-        <input type='text' class='form-control' name='ownername' id='ownername' autocomplete='off' v-model='robot.owner'></input>
+          <el-input placeholder="The name of your robot, i.e. RD2" v-model="robot.name" icon='warning'></el-input>
+        </el-card>
 
-        <label for=owner>TeamName</label>
-        <input type='text' class='form-control' name='teamname' id='teamname' autocomplete='off'></input>
+        <el-card class='box-card'>
+          <label for=owner>Fullname of the owner</label>
+          <input type='text' class='form-control' name='ownername' id='ownername' autocomplete='off' v-model='robot.owner'></input>
 
-        <label for='team'>Choose existing team</label>
-        <select id='team' name='team' class='form-control'>
+          <label for=owner>TeamName</label>
+          <input type='text' class='form-control' name='teamname' id='teamname' autocomplete='off'></input>
+
+          <label for='team'>Choose existing team</label>
+          <select id='team' name='team' class='form-control'>
           <option v-for="team in teams" :value="team.name">{{team.name}}</option>
         </select>
 
-        <div class="form-group">
-          <label for=owner>Country</label>
-          <input type='text' class='form-control' name='country' id='country' autocomplete='off'></input>
-        </div>
+        <el-input placeholder='Mobilenumber' v-model='robot.phone' icon='information'></el-input>
+
+          <div class="form-group">
+            <label for=owner>Country</label>
+            <input type='text' class='form-control' name='country' id='country' autocomplete='off'></input>
+          </div>
+        </el-card>
 
         <label for='something'>Toggle me</label>
         <input class='form-control' type="checkbox" checked data-toggle="toggle">
 
         <div class="form-group">
           <div style='float: right;'>
-            <input type='submit' value='Register' class='btn btn-lg btn-primary' v-on:click.prevent='registerRobot(robot);'/>
+            <input type='submit' value='Register' class='btn btn-lg btn-primary' v-on:click.prevent='registerRobot(robot);' />
           </div>
         </div>
 
       </div>
   </div>
-  </form>
+  </form> -->
 
   </div>
 
