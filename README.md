@@ -23,14 +23,34 @@ This is the website used during NorBot Challenge. It contains both the public-fa
 
 ## Installing
 
-* Install MongoDB (www.mongodb.com)
-* Start MongoDB
-
-See https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
-
-    mongod.exe --dbpath c:\mongodb\data
-
 * Install Node.js (www.nodejs.org)
+
+* Install MongoDB Community Server
+
+  See https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
+
+** Setup MongoDB as a Service (recommended)
+
+  mkdir C:\mongodb\data
+  mkdir C:\mongodb\log
+
+Create mongod.cfg (see path in URL below), and give it this content:
+
+      systemLog:
+          destination: file
+          path: c:\mongodb\log\mongod.log
+      storage:
+          dbPath: c:\mongodb\data
+
+
+Then run this to create the Windows Service
+
+  sc.exe create MongoDB binPath= "\"C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe\" --service --config=\"C:\Program Files\MongoDB\Server\3.4\mongod.cfg\"" DisplayName= "MongoDB" start= "auto
+
+** Start MongoDB manually (as an alternative to setting up as Service)
+
+mongod.exe --dbpath c:\mongodb\data
+
 * Clone this repository to local machine
 
       cd C:\GIT\
@@ -38,15 +58,17 @@ See https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
 * Get all the required NPM modules
 
+      cd NorBotChallenge
       npm install
 
-* Get all clientside libraries
+* Get all clientside libraries using Bower
 
+      npm install -g bower
       bower install
 
 * Start the backend server
 
-      node server.js (for one time start)
+      node app\server.js (for one time start)
 
       or
 
