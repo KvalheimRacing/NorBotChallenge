@@ -18,6 +18,7 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var bodyParser = require('body-parser');
+var moment = require('moment');
 
 //Database
 var mongoose = require('mongoose');
@@ -34,6 +35,13 @@ var robotscontroller = require('./controllers/robotscontroller');
 
 //Save the io-object, so that it can be reused by the routes later.
 app.set('socketIO', io);
+// var seconds = 10; //60*3;
+// var intervalId = setInterval(function() {
+//   seconds--;
+//   io.emit('tick', seconds);
+//   if (seconds <= 0)
+//     clearInterval(intervalId);
+// }, 1000);
 
 // //Socket.IO connection.
 // io.on('connection', function(socket) {
@@ -101,7 +109,7 @@ app.use(bodyParser.json());
 
 //Configure express to serve static files
 app.use(express.static('app/static_files'));
-app.use(require('./routes/robots'));
+app.use(require('./routes'));
 app.use(require('./controllers'));
 
 //Testing Pug

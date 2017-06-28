@@ -6,6 +6,8 @@ var express = require('express');
 var router = express.Router();
 var robotscontroller = require('../controllers/robotscontroller');
 var teamsController = require('../controllers/teamscontroller');
+var raceController = require('../controllers/racecontroller');
+
 
 router.get('/api/robots', function(req, res) {
   robotscontroller.list_all_robots(req, res);
@@ -47,6 +49,10 @@ router.get('/api/teams', function(req, res){
 
 router.post('/api/teams', function(req, res) {
   teamsController.create_team(req, res);
+})
+
+router.post("/api/racetimer", function(req, res){
+  raceController.start_countdown(req, res);
 })
 
 module.exports = router

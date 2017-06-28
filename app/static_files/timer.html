@@ -1,0 +1,72 @@
+<html>
+
+<head>
+  <!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
+  <script src='bower_libs/jquery/dist/jquery.js'></script>
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+  <link href='bower_libs/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet'>
+  <link href='bower_libs/bootstrap-toggle/css/bootstrap-toggle.min.css' rel='stylesheet'>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js'></script>
+  <script src='bower_libs/bootstrap-toggle/js/bootstrap-toggle.min.js'></script>
+  <script src='bower_libs/vue/dist/vue.js'></script>
+  <script src='bower_libs/vue-resource/dist/vue-resource.js'></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src='js/timer.js' defer></script>
+
+  <script>
+    $(function() {
+      var socket = io();
+
+      socket.on('tick', function(seconds) {
+        //Converts the seconds (180 for 3.mins) to min and seconds.
+        var minutes = Math.floor(seconds / 60);
+        var secs = seconds - minutes * 60;
+        secs = ("00" + secs).slice(-2); //Zero pad seconds on left side
+        $('#countdown').text(minutes + ':' + secs);
+      })
+
+      socket.on('onCountdownStarted', function(data){
+        console.log("onCountdownStarted");
+      });
+
+      socket.on('onCountdownEnded', function(data){
+        console.log("onCountdownEnded");
+      });
+
+      socket.on('disconnect', function(){
+        console.warn('socket.io connection lost!');
+      })
+    });
+  </script>
+</head>
+
+<body>
+
+  <div class='container' id='app'>
+    <div class='jumbotron'>
+      <center>
+        <h1>NorBot Challenge</h1></center>
+    </div>
+
+    <ul class="nav nav-pills">
+      <li role="presentation"><a href="index.html">Information</a></li>
+      <li role="presentation"><a href="register.html">Register</a></li>
+      <li role="presentation"><a href="#">Rules</a></li>
+      <li role="presentation"><a href="#">FAQ</a></li>
+      <li role="presentation"><a href="#">Contact</a></li>
+      <li role="presentation" class="active"><a href="timer.html">Live results</a></li>
+      <li role="presentation"><a href="#">Login</a></li>
+      <li role="presentation"><a href="robotlist.html">List robots</a></li>
+    </ul>
+
+    <div style='text-align: center; font-size: 200px;'>
+      <span id='countdown'>--:--</span>
+    </div>
+
+    <el-button type="primary" size="large" v-on:click.prevent='startCountdown();' style='float: right;' icon='caret-right'>Start</el-button>
+    <el-button type="primary" size="large" v-on:click.prevent='pauseCountdown();' style='float: right;' icon='caret-right'>Pause</el-button>
+    <el-button type="primary" size="large" v-on:click.prevent='stopCountdown();' style='float: right;' icon='caret-right'>Stop</el-button>
+</body>
+
+</html>
