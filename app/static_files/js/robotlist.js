@@ -5,7 +5,8 @@ var app = new Vue({
   data: {
     robots: [],
     rightCanDeleteRobot: true,
-    filtertext: ''
+    filtertext: '',
+    loading: true
   },
   mounted: function() { //Fired as soon as page is done loading
 
@@ -67,6 +68,7 @@ var app = new Vue({
       //Get all robots from backend REST API
       this.$http.get('/api/robots').then(function(response) {
         this.robots = response.data;
+        this.loading=false;
       })
     },
     beep: function() {
