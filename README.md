@@ -81,6 +81,8 @@ mongod.exe --dbpath c:\mongodb\data
 See https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
 and
 https://www.terlici.com/2014/08/25/best-practices-express-structure.html
+and
+https://scotch.io/tutorials/getting-started-with-vue-router
 
 ## Development plan (suggestion)
 

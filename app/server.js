@@ -35,6 +35,13 @@ var robotscontroller = require('./controllers/robotscontroller');
 
 //Save the io-object, so that it can be reused by the routes later.
 app.set('socketIO', io);
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // var seconds = 10; //60*3;
 // var intervalId = setInterval(function() {
 //   seconds--;
