@@ -36,7 +36,7 @@ to show some different robots that might also have a useful purpose. If you have
       6. **Use** is judged based on how useful the robot is. If the robot can for example help humans with things such as daily tasks it scores high point in this category.
 
 ## 6. Presentation
-  1.  All competing teams has the possibility (not mandatory however) to hold a short presentation on a stage in front of all visitors and competitors. The presentation may be a maximum of 15 minutes long. A computer projector will be available (but bring your own laptop). Please contact us on beforehand if you are planning to hold this presentation.
+    1.  All competing teams has the possibility (not mandatory however) to hold a short presentation on a stage in front of all visitors and competitors. The presentation may be a maximum of 15 minutes long. A computer projector will be available (but bring your own laptop). Please contact us on beforehand if you are planning to hold this presentation.
 
 ## 7. Rule conflicts
     1. Use common sense when interpreting the rules. If there are any rules conflicts, the main referee has the final word to say what is right and wrong.
